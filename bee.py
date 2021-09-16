@@ -25,7 +25,8 @@ for word in words:
     if args.required_letter in word:
         word_letters = set([x for x in word])
         if word_letters.issubset(game_letters):
-            found.add(word)
+            found.add((word,game_letters == word_letters))
 
-for word in sorted(list(found), key=lambda x: (1/len(x), x)):
-    print(word)
+for word, pangram in sorted(list(found), key=lambda x: (1/len(x[0]), x[0])):
+    print(f"{word}", "*" if pangram else "")
+
